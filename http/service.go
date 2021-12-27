@@ -30,6 +30,8 @@ type Store interface {
 
 	LeaderAPIAddr() string
 
+	Peers() []string
+
 	SetMeta(key, value string) error
 }
 
@@ -95,9 +97,23 @@ func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		s.handleKeyRequest(w, r)
 	} else if r.URL.Path == "/join" {
 		s.handleJoin(w, r)
+	} else if r.URL.Path == "/status" {
+		s.handleStatus(w, r)
 	} else {
 		w.WriteHeader(http.StatusNotFound)
 	}
+}
+
+
+func (s *Service) handleStatus(w http.ResponseWriter, r *http.Request) {
+	peers := s.store.Peers()
+	ret := map[string]interface{}{
+		"leader": s.store.LeaderAPIAddr(),
+		"peers": peers,
+	}
+	bs, _ := json.Marshal(ret)
+	w.WriteHeader(http.StatusOK)
+	w.Write(bs)
 }
 
 func (s *Service) handleJoin(w http.ResponseWriter, r *http.Request) {

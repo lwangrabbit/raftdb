@@ -42,7 +42,7 @@ run in localhost:
 show cluster status:
 ```
 # curl http://localhost:9091/status
-{"leader":"localhost:9091","peers":["127.0.0.1:8091","localhost:8092","localhost:8093"]}
+{"leader":"localhost:8091","peers":["127.0.0.1:8091","localhost:8092","localhost:8093"]}
 ```
 
 
