@@ -11,8 +11,8 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/hanj4096/raftdb/http"
-	"github.com/hanj4096/raftdb/store"
+	"github.com/lwangrabbit/raftdb/http"
+	"github.com/lwangrabbit/raftdb/store"
 )
 
 // Command line defaults
